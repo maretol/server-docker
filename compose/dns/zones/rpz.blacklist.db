@@ -1,0 +1,37 @@
+$TTL 300
+@       IN      SOA     localhost. root.localhost. (
+        2024011001     ; Serial (YYYYMMDDNN)
+        3600           ; Refresh
+        1800           ; Retry
+        604800         ; Expire
+        86400 )        ; Minimum TTL
+
+@       IN      NS      localhost.
+
+; ブロックルール
+; 形式: domain.com    CNAME .  (NXDOMAINを返す)
+; または: domain.com  A     0.0.0.0  (無効なIPを返す)
+
+; 広告ドメインのブロック
+doubleclick.net         IN      CNAME   .
+*.doubleclick.net       IN      CNAME   .
+googleadservices.com    IN      CNAME   .
+*.googleadservices.com  IN      CNAME   .
+googlesyndication.com   IN      CNAME   .
+*.googlesyndication.com IN      CNAME   .
+microad.jp              IN      CNAME   .
+*.microad.jp            IN      CNAME   .
+microadinc.com          IN      CNAME   .
+*.microadinc.com        IN      CNAME   .
+socdm.com               IN      CNAME   .
+*.socdm.com             IN      CNAME   .
+adnxs.com               IN      CNAME   .
+*.adnxs.com             IN      CNAME   .
+impact-ad.jp            IN      CNAME   .
+*.impact-ad.jp          IN      CNAME   .
+i-mobile.co.jp          IN      CNAME   .
+*.i-mobile.co.jp        IN      CNAME   .
+amoad.com               IN      CNAME   .
+*.amoad.com             IN      CNAME   .
+zucks.co.jp             IN      CNAME   .
+*.zucks.co.jp           IN      CNAME   .

@@ -1,0 +1,26 @@
+services:
+  bind:
+    image: internetsystemsconsortium/bind9:9.20
+    container_name: bind
+    restart: unless-stopped
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    volumes:
+      - ./named.conf:/etc/bind/named.conf:ro
+      - ./zones:/etc/bind/zones:ro
+      - ./cache:/var/cache/bind
+      - ./log:/var/log/named
+    entrypoint: "named -g -c /etc/bind/named.conf" # 通常のentrypointだと何故か起動しない
+    networks:
+      - homelab
+      - monitors
+    environment:
+      - TZ=Asia/Tokyo
+
+networks:
+  homelab:
+    external: true
+  monitors:
+    name: monitors_network
+    external: true
