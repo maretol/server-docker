@@ -1,0 +1,42 @@
+services:
+  r2manager-backend:
+    image: ghcr.io/maretol/r2manager/backend:latest
+    container_name: r2manager-backend
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    environment:
+      - env=prd
+      - R2_ACCOUNT_ID=${R2_ACCOUNT_ID}
+      - R2_ACCESS_KEY_ID=${R2_ACCESS_KEY_ID}
+      - R2_SECRET_ACCESS_KEY=${R2_SECRET_ACCESS_KEY}
+    networks:
+      - monitors
+      - default
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    volumes:
+      - backend-data:/app/data
+
+  r2manager-frontend:
+    image: ghcr.io/maretol/r2manager/frontend:latest
+    container_name: r2manager-frontend
+    restart: unless-stopped
+    ports:
+      - "${R2MANAGER_PORT:-3000}:3000"
+    environment:
+      - BACKEND_URL=http://r2manager-backend:8080
+      - BASE_PATH=/r2_manager
+    depends_on:
+      - r2manager-backend
+    networks:
+      - monitors
+
+networks:
+  monitors:
+    name: monitors_network
+    driver: bridge
+
+volumes:
+  backend-data:
