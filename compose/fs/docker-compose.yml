@@ -13,10 +13,10 @@ services:
       AVAHI_NAME: StorageServer
       SAMBA_CONF_LOG_LEVEL: 7
 
-      SAMBA_GLOBAL_CONFIG_globalconfig: |
-        dos charset = CP932
-        unix charset = UTF-8
-        workgroup = WORKGROUP
+      SAMBA_GLOBAL_CONFIG_dos_SPACE_charset: CP932
+      SAMBA_GLOBAL_CONFIG_unix_SPACE_charset: UTF-8
+      SAMBA_GLOBAL_CONFIG_workgroup: WORKGROUP
+      SAMBA_GLOBAL_CONFIG_server_SPACE_multi_SPACE_channel_SPACE_support: no
 
       ACCOUNT_maretol: ${SAMBA_PASSWORD}
       UID_maretol: 1000
